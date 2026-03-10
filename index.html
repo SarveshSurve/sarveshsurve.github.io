@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sarvesh V. Surve – Microbiologist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f5f2ec; --ink: #1a1a14; --accent: #3a6b4a; --accent2: #c8693a;
+      --muted: #7a7a6a; --card: #ffffff; --border: #d8d4cc; --hero-bg: #1a2e22;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 3rem;
+      background: rgba(26,46,34,0.97); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #e8e4da; letter-spacing: 0.04em; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(232,228,218,0.7); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: #c8e8c0; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; background: var(--hero-bg);
+      display: grid; grid-template-columns: 1fr 380px;
+      align-items: center; padding: 7rem 3rem 4rem; gap: 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 30% 50%, rgba(58,107,74,0.2) 0%, transparent 70%),
+                  radial-gradient(ellipse 50% 40% at 80% 80%, rgba(200,105,58,0.1) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; opacity: 0.04;
+      background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-left { position: relative; z-index: 1; }
+    .hero-tag { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: #7abf8a; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 4.5vw, 4.8rem); line-height: 1.05; color: #f0ece2; white-space: nowrap; opacity: 0; animation: fadeUp 0.9s ease forwards 0.4s; }
+    .hero h1 em { font-style: italic; color: #a8d8b0; }
+    .hero-subtitle { font-family: 'DM Mono', monospace; font-size: 0.83rem; color: rgba(240,236,226,0.55); letter-spacing: 0.06em; margin-top: 1.2rem; margin-bottom: 2.5rem; max-width: 520px; line-height: 1.9; opacity: 0; animation: fadeUp 1s ease forwards 0.6s; }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 1s ease forwards 0.8s; }
+    .hero-stats { display: flex; gap: 2.5rem; margin-top: 3rem; opacity: 0; animation: fadeUp 1s ease forwards 1s; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #a8d8b0; line-height: 1; }
+    .stat-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(240,236,226,0.4); margin-top: 0.3rem; }
+
+    /* HERO PHOTO */
+    .hero-photo-wrap { position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; opacity: 0; animation: fadeUp 1s ease forwards 0.5s; }
+    .hero-photo-frame { width: 320px; height: 400px; border: 1px solid rgba(168,216,176,0.3); border-radius: 4px; overflow: hidden; position: relative; background: rgba(255,255,255,0.04); }
+    .hero-photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+    .hero-photo-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(58,107,74,0.15); color: rgba(168,216,176,0.5); }
+    .hero-photo-placeholder svg { width: 60px; height: 60px; margin-bottom: 1rem; opacity: 0.4; }
+    .hero-photo-placeholder p { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.5; }
+    .hero-photo-accent { position: absolute; bottom: -12px; right: -12px; width: 100px; height: 100px; border: 1px solid rgba(168,216,176,0.2); border-radius: 4px; z-index: -1; }
+
+    /* BUTTONS */
+    .btn { display: inline-block; padding: 0.75rem 1.8rem; font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: all 0.2s; cursor: pointer; border: none; }
+    .btn-primary { background: #3a6b4a; color: #e8ffe8; border: 1px solid #3a6b4a; }
+    .btn-primary:hover { background: #4a8a5e; }
+    .btn-outline { background: transparent; color: rgba(240,236,226,0.7); border: 1px solid rgba(240,236,226,0.25); }
+    .btn-outline:hover { border-color: rgba(240,236,226,0.6); color: #f0ece2; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* SECTIONS */
+    section { padding: 5rem 3rem; max-width: 1100px; margin: 0 auto; }
+    .section-tag { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); color: var(--ink); margin-bottom: 3rem; line-height: 1.1; }
+    .divider { width: 100%; height: 1px; background: var(--border); }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .about-text p { font-size: 1.05rem; line-height: 1.85; color: #3a3a2e; margin-bottom: 1.2rem; }
+    .about-text p strong { color: var(--accent); font-weight: 500; }
+    .info-block { border-left: 2px solid var(--accent); padding-left: 1.2rem; margin-bottom: 2rem; }
+    .info-block h4 { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    .info-block p { font-size: 0.95rem; color: var(--ink); line-height: 1.6; }
+    .info-block a { color: var(--accent); text-decoration: none; }
+    .info-block a:hover { text-decoration: underline; }
+
+    /* FUN PHOTOS */
+    .fun-photos { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 180px 180px; gap: 0.6rem; margin-top: 2rem; }
+    .fun-photo { border-radius: 3px; overflow: hidden; background: rgba(58,107,74,0.08); border: 1px solid var(--border); position: relative; }
+    .fun-photo:first-child { grid-row: span 2; }
+    .fun-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    .fun-photo:hover img { transform: scale(1.04); }
+    .fun-photo-placeholder { width: 100%; height: 100%; min-height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--muted); }
+    .fun-photo-placeholder span { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.5rem; opacity: 0.6; }
+    .fun-photo-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.55)); padding: 0.8rem 0.7rem 0.5rem; font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.8); }
+
+    /* RESEARCH */
+    .research-section { background: var(--hero-bg); padding: 5rem 0; }
+    .research-inner { max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
+    .research-inner .section-tag { color: #7abf8a; }
+    .research-inner .section-title { color: #f0ece2; }
+    .research-hint { color: rgba(232,228,218,0.4); font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2rem; }
+    .research-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+
+    .research-card {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px; overflow: hidden; position: relative;
+      transition: transform 0.3s, box-shadow 0.3s; min-height: 240px;
+      display: flex; flex-direction: column;
+    }
+    .research-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+    .research-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #3a6b4a, #7abf8a); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; z-index: 4; }
+    .research-card:hover::before { transform: scaleX(1); }
+
+    /* photo slides in from right */
+    .rc-photo { position: absolute; top: 0; right: -55%; bottom: 0; width: 55%; transition: right 0.45s cubic-bezier(0.4,0,0.2,1); z-index: 2; }
+    .research-card:hover .rc-photo { right: 0; }
+    .rc-photo::before { content: ''; position: absolute; top: 0; left: -30px; bottom: 0; width: 30px; background: linear-gradient(90deg, transparent, rgba(26,46,34,0.8)); z-index: 3; }
+    .rc-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .rc-photo-ph { width: 100%; height: 100%; background: rgba(58,107,74,0.3); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; }
+
+    .rc-body { padding: 2rem; position: relative; z-index: 1; flex: 1; transition: padding-right 0.45s; }
+    .research-card:hover .rc-body { padding-right: 48%; }
+
+    .card-icon { font-size: 1.6rem; margin-bottom: 0.8rem; }
+    .research-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.6rem; color: #f0ece2; }
+    .research-card p { font-size: 0.88rem; line-height: 1.7; color: rgba(232,228,218,0.65); }
+
+    /* PUBLICATIONS */
+    .pub-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
+    .scholar-link { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 0.5rem 1rem; border-radius: 2px; transition: all 0.2s; }
+    .scholar-link:hover { background: var(--accent); color: white; }
+    .pub-list { display: flex; flex-direction: column; }
+    .pub-item { display: grid; grid-template-columns: 80px 1fr; gap: 1.5rem; padding: 1.8rem 0; border-bottom: 1px solid var(--border); }
+    .pub-item:first-child { border-top: 1px solid var(--border); }
+    .pub-year { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted); padding-top: 0.25rem; line-height: 1.6; }
+    .pub-content h4 { font-size: 1rem; font-weight: 500; margin-bottom: 0.35rem; line-height: 1.45; }
+    .pub-content h4 a { color: var(--ink); text-decoration: none; transition: color 0.2s; }
+    .pub-content h4 a:hover { color: var(--accent); text-decoration: underline; }
+    .pub-content p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+    .pub-meta { font-size: 0.83rem; color: var(--muted); margin-top: 0.25rem; }
+    .pub-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .pub-badge { display: inline-block; padding: 0.15rem 0.6rem; font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 2px; }
+    .badge-review { background: #fff3e0; color: #c8693a; }
+    .badge-prep { background: #e8f4ea; color: #3a6b4a; }
+    .badge-pub { background: #e8eaf6; color: #3949ab; }
+    .badge-top { background: #fce4ec; color: #c2185b; }
+    .badge-first { background: #e8f4ea; color: #2e7d32; border: 1px solid #a5d6a7; }
+
+    /* EDUCATION */
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 4rem; }
+    .edu-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+    .edu-logo-wrap { height: 60px; display: flex; align-items: center; }
+    .edu-logo-wrap img { max-height: 55px; max-width: 180px; object-fit: contain; display: block; }
+    .edu-logo-placeholder { height: 48px; width: 160px; background: var(--bg); border: 1px dashed var(--border); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .edu-degree { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--ink); }
+    .edu-school { font-size: 0.9rem; color: var(--muted); margin-top: 0.1rem; }
+    .edu-date { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; color: var(--accent); }
+    .edu-detail { font-size: 0.87rem; color: #5a5a4a; line-height: 1.65; }
+    .edu-gpa { display: inline-block; margin-top: 0.5rem; padding: 0.15rem 0.6rem; background: #e8f4ea; color: #3a6b4a; font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em; border-radius: 2px; }
+
+    /* AWARDS */
+    .awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+    .award-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1.2rem; background: var(--card); border: 1px solid var(--border); border-radius: 4px; }
+    .award-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .award-item h4 { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.2rem; }
+    .award-item p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+    .skill-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.8rem; }
+    .skill-card h4 { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .skill-tag { padding: 0.25rem 0.7rem; background: var(--bg); border: 1px solid var(--border); border-radius: 2px; font-size: 0.8rem; color: #4a4a3a; }
+
+    /* CONTACT */
+    .contact-section { background: var(--hero-bg); }
+    .contact-inner { max-width: 1100px; margin: 0 auto; padding: 5rem 3rem; }
+    .contact-inner .section-tag { color: #7abf8a; }
+    .contact-inner .section-title { color: #f0ece2; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .contact-text p { font-size: 1rem; line-height: 1.8; color: rgba(232,228,218,0.7); margin-bottom: 2rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 0.8rem; }
+    .contact-link { display: flex; align-items: center; gap: 0.8rem; color: rgba(232,228,218,0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .contact-link:hover { color: #a8d8b0; }
+    .contact-link-icon { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; background: rgba(255,255,255,0.08); padding: 0.2rem 0.5rem; border-radius: 2px; color: #7abf8a; flex-shrink: 0; width: 64px; text-align: center; }
+
+    footer { background: #111a15; color: rgba(232,228,218,0.35); text-align: center; padding: 2rem; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 4rem; }
+      .hero-photo-wrap { display: none; }
+      .hero h1 { white-space: normal; }
+      .about-grid, .edu-grid, .contact-grid { grid-template-columns: 1fr; }
+      section { padding: 4rem 1.5rem; }
+      .research-inner, .contact-inner { padding: 4rem 1.5rem; }
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1rem; }
+      .pub-item { grid-template-columns: 60px 1fr; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Sarvesh V. Surve</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#publications">Publications</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-left">
+    <div class="hero-tag">PhD Candidate · Microbiology & Immunology · Dartmouth</div>
+    <h1><em>Sarvesh V. Surve</em></h1>
+    <p class="hero-subtitle">
+      Geisel School of Medicine at Dartmouth<br />
+      Gut microbiome science &amp; the probiotic potential<br />
+      of <em>Bacteroides</em> in cystic fibrosis
+    </p>
+    <div class="hero-cta">
+      <a href="#research" class="btn btn-primary">View Research</a>
+      <a href="#publications" class="btn btn-outline">Publications</a>
+      <a href="sarvesh_cv.pdf" download class="btn btn-outline">Download CV</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Publications</div></div>
+      <div class="stat"><div class="stat-num">8</div><div class="stat-label">Years Research</div></div>
+    </div>
+  </div>
+  <div class="hero-photo-wrap">
+    <div class="hero-photo-frame">
+      <img src="photo_headshot.jpg" alt="Sarvesh V. Surve"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="hero-photo-placeholder" style="display:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <p>photo_headshot.jpg</p>
+      </div>
+    </div>
+    <div class="hero-photo-accent"></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="divider"></div>
+<section id="about">
+  <div class="section-tag">01 — About</div>
+  <h2 class="section-title">The Scientist<br />Behind the Work</h2>
+  <div class="about-grid">
+    <div>
+      <div class="about-text">
+        <p>I'm a PhD candidate at the <strong>Geisel School of Medicine at Dartmouth</strong>, working in Dr. George O'Toole's lab. My research sits at the intersection of microbial ecology, gut microbiome science, and translational medicine, focused on how gut bacteria can improve outcomes in <strong>cystic fibrosis (CF)</strong>.</p>
+        <p>My thesis centers on <em>Bacteroides</em> as a potential CF probiotic. I combine experimental evolution, molecular microbiology, culturomics, and bioinformatics to understand how these bacteria adapt in the CF gut.</p>
+        <p>Before Dartmouth, I trained in India at <strong>Symbiosis International University</strong> and the <strong>University of Mumbai</strong>, developing expertise in lactic acid bacteria, probiotic science, and secondary metabolite biosynthesis. In 2025, I attended the <strong>Marine Biological Laboratory</strong>'s Microbial Diversity course at Woods Hole, MA.</p>
+        <p>Outside the lab, I'm chasing National Parks, Formula 1 races, and the perfect data visualization.</p>
+      </div>
+      <div class="fun-photos">
+        <div class="fun-photo">
+          <img src="photo_fun_1.jpg" alt="Fun photo 1"
+               onerror="this.style.display='none'; this.parentElement.querySelector('.fun-photo-placeholder').style.display='flex'; this.parentElement.querySelector('.fun-photo-caption') && (this.parentElement.querySelector('.fun-photo-caption').style.display='none');">
+          <div class="fun-photo-placeholder" style="display:none;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>photo_fun_1.jpg</span>
+          </div>
+          <div class="fun-photo-caption">Woods Hole · MBL 2025</div>
+        </div>
+        <div class="fun-photo">
+          <img src="photo_fun_2.jpg" alt="Fun photo 2"
+               onerror="this.style.display='none'; this.parentElement.querySelector('.fun-photo-placeholder').style.display='flex'; this.parentElement.querySelector('.fun-photo-caption') && (this.parentElement.querySelector('.fun-photo-caption').style.display='none');">
+          <div class="fun-photo-placeholder" style="display:none;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>photo_fun_2.jpg</span>
+          </div>
+          <div class="fun-photo-caption">Distracted by a duck</div>
+        </div>
+        <div class="fun-photo">
+          <img src="photo_fun_3.jpg" alt="Fun photo 3"
+               onerror="this.style.display='none'; this.parentElement.querySelector('.fun-photo-placeholder').style.display='flex'; this.parentElement.querySelector('.fun-photo-caption') && (this.parentElement.querySelector('.fun-photo-caption').style.display='none');">
+          <div class="fun-photo-placeholder" style="display:none;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>photo_fun_3.jpg</span>
+          </div>
+          <div class="fun-photo-caption">Holding a Nobel Prize</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="info-block"><h4>Current Position</h4><p>PhD Candidate · Microbiology &amp; Immunology<br/>Dartmouth College · Hanover, NH<br/>Expected June 2027</p></div>
+      <div class="info-block"><h4>Advisor</h4><p>Dr. George A. O'Toole<br/>Geisel School of Medicine</p></div>
+      <div class="info-block"><h4>Google Scholar</h4><p><a href="https://scholar.google.com/citations?pli=1&authuser=1&user=W3YO928AAAAJ" target="_blank">View Profile →</a></p></div>
+      <div class="info-block"><h4>ORCID</h4><p><a href="https://orcid.org/0000-0003-2942-6315" target="_blank">0000-0003-2942-6315</a></p></div>
+      <div class="info-block"><h4>LinkedIn</h4><p><a href="https://www.linkedin.com/in/sarvesh-surve" target="_blank">sarvesh-surve</a></p></div>
+      <div class="info-block"><h4>Interests</h4><p>Formula 1 · National Parks · Data visualization · Science history</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<div class="divider"></div>
+<div class="research-section" id="research">
+  <div class="research-inner">
+    <div class="section-tag">02 — Research</div>
+    <h2 class="section-title">Core Research Areas</h2>
+    <p class="research-hint">↗ Hover each card to see project photos</p>
+    <div class="research-cards">
+
+      <div class="research-card">
+        <div class="rc-body"><div class="card-icon">🦠</div><h3>CF Gut Microbiome</h3><p>Culturomics of colonoscopy samples from CF and non-CF individuals — one of the largest gut culture collections of its kind to understand dysbiosis in cystic fibrosis.</p></div>
+        <div class="rc-photo">
+          <img src="photo_research_1.jpg" alt="CF Gut Microbiome" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="rc-photo-ph" style="display:none;">🦠</div>
+        </div>
+      </div>
+
+      <div class="research-card">
+        <div class="rc-body"><div class="card-icon">🧬</div><h3>Bacteroides as CF Probiotic</h3><p>Evolving <em>Bacteroides</em> strains for enhanced fitness in CF-like environments; decoding molecular mechanisms including bile acid resistance via Diversity-Generating Retroelements.</p></div>
+        <div class="rc-photo">
+          <img src="photo_research_2.jpg" alt="Bacteroides" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="rc-photo-ph" style="display:none;">🧬</div>
+        </div>
+      </div>
+
+      <div class="research-card">
+        <div class="rc-body"><div class="card-icon">🔬</div><h3>Microbial Ecology</h3><p>Spatial and genomic ecology of Gracilibacteria in green sulfur bacteria enrichment cultures using metagenomics and high-resolution imaging at MBL Woods Hole (2025).</p></div>
+        <div class="rc-photo">
+          <img src="photo_research_3.jpg" alt="Microbial Ecology" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="rc-photo-ph" style="display:none;">🔬</div>
+        </div>
+      </div>
+
+      <div class="research-card">
+        <div class="rc-body"><div class="card-icon">⚗️</div><h3>Probiotic LAB Biology</h3><p>Isolated and characterized novel <em>L. plantarum</em> strains; evolved tolerance to furfural and 5-HMF for lignocellulosic fermentations. Three first-author publications.</p></div>
+        <div class="rc-photo">
+          <img src="photo_research_4.jpg" alt="Probiotic LAB" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="rc-photo-ph" style="display:none;">⚗️</div>
+        </div>
+      </div>
+
+      <div class="research-card">
+        <div class="rc-body"><div class="card-icon">🌿</div><h3><em>Streptococus ruoffii</em> sp. nov.</h3><p>Isolated and characterized <em>Streptococus ruoffii</em> sp. nov. The new species was isolated from esophagus of adult male heterozygous for CF allele.</p></div>
+        <div class="rc-photo">
+          <img src="photo_research_5.jpg" alt="Natural Products" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="rc-photo-ph" style="display:none;">🌿</div>
+        </div>
+      </div>
+
+      <div class="research-card">
+        <div class="rc-body"><div class="card-icon">💻</div><h3>Bioinformatics</h3><p>Genome assembly, annotation, comparative genomics, phylogenetics, transcriptomics, and microbiome analysis using R, Python, and Linux. Metagenomics for complex communities.</p></div>
+        <div class="rc-photo">
+          <img src="photo_research_6.jpg" alt="Bioinformatics" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="rc-photo-ph" style="display:none;">💻</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PUBLICATIONS -->
+<div class="divider"></div>
+<section id="publications">
+  <div class="section-tag">03 — Publications</div>
+  <div class="pub-header">
+    <h2 class="section-title" style="margin-bottom:0;">Scientific Output</h2>
+    <a href="https://scholar.google.com/citations?pli=1&authuser=1&user=W3YO928AAAAJ" target="_blank" class="scholar-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 10a8 8 0 0 1 7.162 3.44L24 9.5z"/></svg>
+      Google Scholar
+    </a>
+  </div>
+  <div class="pub-list">
+
+    <div class="pub-item">
+      <div class="pub-year">2026<br/>In Prep</div>
+      <div class="pub-content">
+        <h4><a href="#">Spatial and Genomic Ecology of Gracilibacteria in Green Sulfur Bacteria Enrichment Cultures</a></h4>
+        <p>Surve S.V., Eggins S., Day L.A., Huang Y., Kahn A., Charles-Orszag A., Yang J., O'Toole G.A., Dawson S.C., Spear J.R.</p>
+        <div class="pub-badges"><span class="pub-badge badge-prep">In Preparation</span><span class="pub-badge badge-first">First Author</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2026</div>
+      <div class="pub-content">
+        <h4><a href="https://journals.asm.org/doi/full/10.1128/spectrum.03126-25">The Regional Landscape of the Human Colon Culturome in Health and Cystic Fibrosis</a></h4>
+        <p>Surve S.V., Valls R.A., Barrack K.E., Gwilt L.L., Gardner T.B., O'Toole G.A.</p>
+        <div class="pub-meta"><em>Microbiology Spectrum</em></div>
+        <div class="pub-badges"><span class="pub-badge badge-prep">Published</span><span class="pub-badge badge-first">First Author</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2026</div>
+      <div class="pub-content">
+        <h4><a href="#">Genome Sequences of 109 Gut Bacteria Isolated from Colonoscopy Samples of Individuals with and without Cystic Fibrosis</a></h4>
+        <p>Surve S.V., Valls R.A., O'Toole G.A.</p>
+        <div class="pub-meta"><em>Microbiology Resource Announcement</em></div>
+        <div class="pub-badges"><span class="pub-badge badge-prep">Published</span><span class="pub-badge badge-first">First Author</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2026<br/>In Review</div>
+      <div class="pub-content">
+        <h4><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12424778/">A Genotoxin Associated with Colorectal Cancer Linked to Gut Dysbiosis in Children with Cystic Fibrosis</a></h4>
+        <p>Barrack K.E., Surve S.V., Bezerra A.V., Murphy C.E., Soucy S.M., Valls R.A., O'Toole G.A.</p>
+        <div class="pub-meta"><em>PNAS</em></div>
+        <div class="pub-badges"><span class="pub-badge badge-review">In Review at PNAS</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2026<br/>In Review</div>
+      <div class="pub-content">
+        <h4><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12407987/">Sex and Intestinal-Region-Specific Bacteroides Regulation of Host Response to Pulmonary Challenge</a></h4>
+        <p>Valls R.A., Barrack K.E., Surve S.V., Bliska J.B., O'Toole G.A.</p>
+        <div class="pub-meta"><em>mBio</em></div>
+        <div class="pub-badges"><span class="pub-badge badge-review">In Review at mBio</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2025</div>
+      <div class="pub-content">
+        <h4><a href="https://journals.asm.org/doi/full/10.1128/spectrum.01451-25" target="_blank">Profiling Bile Acids in the Stools of Humans and Animal Models of Cystic Fibrosis</a></h4>
+        <p>Carmichael M.M., Valls R.A., Soucy S., Sanville J.L., Madan J.L., Surve S.V., Sundrud M.S., O'Toole G.A.</p>
+        <div class="pub-meta"><em>Microbiology Spectrum</em></div>
+        <div class="pub-badges"><span class="pub-badge badge-pub">Published</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2024</div>
+      <div class="pub-content">
+        <h4><a href="https://doi.org/10.1016/j.bcab.2024.103449" target="_blank">Transcriptomic Analysis Identifies a Furfural Reductase in Lactiplantibacillus plantarum</a></h4>
+        <p>Surve S.V., Rajkhowa R., Vyas P., Vijayvargiya M., Khare S., Kulkarni R.</p>
+        <div class="pub-meta"><em>Biocatalysis and Agricultural Biotechnology</em>, 62, 103449</div>
+        <div class="pub-badges"><span class="pub-badge badge-pub">Published</span><span class="pub-badge badge-first">First Author</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2024</div>
+      <div class="pub-content">
+        <h4><a href="https://doi.org/10.1093/jambio/lxae035" target="_blank">Laboratory Domestication of Lactiplantibacillus plantarum Alters Some Phenotypic Traits but Causes Non-Novel Genomic Impact</a></h4>
+        <p>Surve S.V., Shinde D.B., Fernandes J.M., Sharma S., Vijayvargiya M., Kadam K., Kulkarni R.</p>
+        <div class="pub-meta"><em>Journal of Applied Microbiology</em>, 135(2), lxae035</div>
+        <div class="pub-badges"><span class="pub-badge badge-pub">Published</span><span class="pub-badge badge-first">First Author</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2024</div>
+      <div class="pub-content">
+        <h4><a href="https://doi.org/10.1128/jb.00286-23" target="_blank">An In Vitro Medium for Modeling Gut Dysbiosis Associated with Cystic Fibrosis</a></h4>
+        <p>Barrack K.E., Hampton T.H., Valls R.A., Surve S.V., Gardner T.B., Sanville J.L., Madan J.L., O'Toole G.A.</p>
+        <div class="pub-meta"><em>Journal of Bacteriology</em>, 206(1), e00286-23</div>
+        <div class="pub-badges"><span class="pub-badge badge-pub">Published</span></div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2022</div>
+      <div class="pub-content">
+        <h4><a href="https://doi.org/10.1038/s41598-022-05850-3" target="_blank">Isolation, Characterization, and Comparative Genomics of Potentially Probiotic Lactiplantibacillus plantarum Strains from Indian Foods</a></h4>
+        <p>Surve S., Shinde D.B., Kulkarni R.</p>
+        <div class="pub-meta"><em>Scientific Reports</em>, 12(1), 1940</div>
+        <div class="pub-badges"><span class="pub-badge badge-pub">Published</span><span class="pub-badge badge-first">First Author</span><span class="pub-badge badge-top">Top 100 Microbiology 2022</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<div class="divider"></div>
+<section id="education">
+  <div class="section-tag">04 — Education</div>
+  <h2 class="section-title">Academic<br />Journey</h2>
+  <div class="edu-grid">
+
+    <div class="edu-card">
+      <div class="edu-logo-wrap">
+        <img src="logo_dartmouth.png" alt="Dartmouth" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="edu-logo-placeholder" style="display:none;">logo_dartmouth.png</div>
+      </div>
+      <div><div class="edu-degree">Doctor of Philosophy</div><div class="edu-school">Microbiology &amp; Immunology · Geisel School of Medicine at Dartmouth, NH</div><div class="edu-date">Aug 2021 – Jun 2027 (Expected)</div></div>
+      <div class="edu-detail">Thesis: <em>Bacteroides as a potential CF probiotic</em><br/>Advisor: Dr. George A. O'Toole · Contributing to 2 patent applications<br/>Includes Microbial Diversity Course, MBL Woods Hole (2025)</div>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-logo-wrap">
+        <img src="logo_symbiosis.png" alt="Symbiosis" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="edu-logo-placeholder" style="display:none;">logo_symbiosis.png</div>
+      </div>
+      <div><div class="edu-degree">Master of Science · Biotechnology</div><div class="edu-school">Symbiosis International University, Pune, India</div><div class="edu-date">Aug 2016 – Jun 2018</div></div>
+      <div class="edu-detail">Thesis: Isolation and Characterization of Lactic Acid Bacteria from Indian Foods<br/>PG Merit Scholarship — 50% tuition waiver<div><span class="edu-gpa">GPA 9.21/10 · Rank 1/30</span></div></div>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-logo-wrap">
+        <img src="logo_mumbai.png" alt="University of Mumbai" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="edu-logo-placeholder" style="display:none;">logo_mumbai.png</div>
+      </div>
+      <div><div class="edu-degree">Bachelor of Science · Biotechnology</div><div class="edu-school">University of Mumbai, India</div><div class="edu-date">Aug 2013 – Jun 2016</div></div>
+      <div class="edu-detail">Foundation in molecular biology, biochemistry, and microbiology<div><span class="edu-gpa">GPA 6.85/7.0 · Rank 4/30</span></div></div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:3rem;">
+    <div class="section-tag" style="margin-bottom:1.5rem;">Honors &amp; Awards</div>
+    <div class="awards-grid">
+      <div class="award-item"><div class="award-icon">🏆</div><div><h4>M2P2 Scholarship</h4><p>Dartmouth College · Aug 2025 · Off-campus course funding during PhD</p></div></div>
+      <div class="award-item"><div class="award-icon">🎓</div><div><h4>PG Merit Scholarship</h4><p>Symbiosis International University · 50% tuition waiver as Rank 1 student</p></div></div>
+      <div class="award-item"><div class="award-icon">🇮🇳</div><div><h4>DST INSPIRE Fellowship</h4><p>Ministry of Science &amp; Technology, Govt. of India · Awarded to top-ranked graduates</p></div></div>
+      <div class="award-item"><div class="award-icon">📊</div><div><h4>CSIR-UGC NET-LS</h4><p>All India Rank 22 · Highly competitive STEM research fellowship qualification exam</p></div></div>
+      <div class="award-item"><div class="award-icon">🔭</div><div><h4>Summer Research Fellowship</h4><p>Indian Academy of Sciences · National fellowship for early-career STEM researchers</p></div></div>
+      <div class="award-item"><div class="award-icon">⭐</div><div><h4>Veronica Rodriguez Award</h4><p>Tata Institute of Fundamental Research · Leadership &amp; excellence, CUBE program</p></div></div>
+    </div>
+  </div>
+
+  <div style="margin-top:3.5rem;">
+    <div class="section-tag" style="margin-bottom:1.5rem;">Skills &amp; Tools</div>
+    <div class="skills-grid">
+      <div class="skill-card"><h4>Programming</h4><div class="skill-tags"><span class="skill-tag">R</span><span class="skill-tag">Python</span><span class="skill-tag">Linux CLI</span><span class="skill-tag">Bash</span></div></div>
+      <div class="skill-card"><h4>Bioinformatics</h4><div class="skill-tags"><span class="skill-tag">Genome Assembly</span><span class="skill-tag">Annotation</span><span class="skill-tag">Comparative Genomics</span><span class="skill-tag">Phylogenetics</span><span class="skill-tag">Transcriptomics</span><span class="skill-tag">Microbiome Analysis</span></div></div>
+      <div class="skill-card"><h4>Wet Lab</h4><div class="skill-tags"><span class="skill-tag">Molecular Cloning</span><span class="skill-tag">Culturomics</span><span class="skill-tag">Bacterial Genetics</span><span class="skill-tag">Experimental Evolution</span><span class="skill-tag">Metagenomics</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="divider"></div>
+<div class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="section-tag">05 — Contact</div>
+    <h2 class="section-title">Let's Connect</h2>
+    <div class="contact-grid">
+      <div class="contact-text">
+        <p>I'm always happy to discuss my research, potential collaborations, or opportunities in academia and industry. Whether you're interested in gut microbiome science, CF biology, or just want to talk science — feel free to reach out.</p>
+        <p>I'll be completing my PhD in June 2027 and am actively exploring postdoctoral and industry positions in microbiome science, translational medicine, and biotechnology.</p>
+      </div>
+      <div>
+        <div class="contact-links">
+          <a href="mailto:sarvesh.v.surve.gr@dartmouth.edu" class="contact-link"><span class="contact-link-icon">Email</span>sarvesh.v.surve.gr@dartmouth.edu</a>
+          <a href="mailto:sarvesh.surve13@gmail.com" class="contact-link"><span class="contact-link-icon">Gmail</span>sarvesh.surve13@gmail.com</a>
+          <a href="tel:+16033490244" class="contact-link"><span class="contact-link-icon">Phone</span>(603) 349-0244</a>
+          <a href="https://orcid.org/0000-0003-2942-6315" target="_blank" class="contact-link"><span class="contact-link-icon">ORCID</span>0000-0003-2942-6315</a>
+          <a href="https://www.linkedin.com/in/sarvesh-surve" target="_blank" class="contact-link"><span class="contact-link-icon">LinkedIn</span>sarvesh-surve</a>
+          <a href="https://scholar.google.com/citations?pli=1&authuser=1&user=W3YO928AAAAJ" target="_blank" class="contact-link"><span class="contact-link-icon">Scholar</span>Google Scholar</a>
+        </div>
+        <div style="margin-top:2.5rem;">
+          <a href="sarvesh_cv.pdf" download class="btn btn-primary">Download CV</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>© 2025 Sarvesh V. Surve · Microbiology &amp; Immunology · Dartmouth College</footer>
+
+</body>
+</html>
