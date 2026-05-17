@@ -9,7 +9,7 @@
   <link rel="apple-touch-icon" href="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -79,7 +79,7 @@
       </div>
     </div>
 
-    <!-- HERO ILLUSTRATION: line-art petri dish + flask + DNA + doodles -->
+    <!-- HERO ILLUSTRATION: line-art petri dish + flask + DNA + doodles + polaroid headshot -->
     <div class="hero-illustration">
       <svg viewBox="0 0 360 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <!-- petri dish (main) -->
@@ -155,6 +155,14 @@
         <!-- tiny squiggle -->
         <path d="M250 60 Q 258 55, 265 60 Q 272 65, 280 60" stroke="#3a6b4a" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.5"/>
       </svg>
+
+      <!-- Polaroid headshot, taped to the notebook -->
+      <div class="polaroid">
+        <img src="photo_headshot.jpg" alt="Sarvesh V. Surve"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="polaroid-placeholder" style="display:none;">photo_<br>headshot.jpg</div>
+        <div class="polaroid-caption">that's me</div>
+      </div>
     </div>
   </div>
 </section>
@@ -169,6 +177,28 @@
       <p>My thesis centers on <em>Bacteroides</em> as a potential CF probiotic. I combine experimental evolution, molecular microbiology, culturomics, and bioinformatics to understand how these bacteria adapt in the CF gut.</p>
       <p>Before Dartmouth, I trained in India at <strong>Symbiosis International University</strong> and the <strong>University of Mumbai</strong>, developing expertise in lactic acid bacteria, probiotic science, and secondary metabolite biosynthesis. In 2025, I attended the <strong>Marine Biological Laboratory</strong>'s Microbial Diversity course at Woods Hole.</p>
       <p>Outside the lab, I'm chasing National Parks, Formula 1 races, and the perfect data visualization.</p>
+
+      <!-- Fun photos: small tilted polaroid cluster -->
+      <div class="fun-photos">
+        <div class="fun-photo">
+          <img src="photo_fun_1.jpg" alt="Woods Hole"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="fun-photo-placeholder" style="display:none;">photo_fun_1.jpg</div>
+          <div class="fun-photo-caption">Woods Hole · 2025</div>
+        </div>
+        <div class="fun-photo">
+          <img src="photo_fun_2.jpg" alt="Distracted by a duck"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="fun-photo-placeholder" style="display:none;">photo_fun_2.jpg</div>
+          <div class="fun-photo-caption">distracted by a duck</div>
+        </div>
+        <div class="fun-photo">
+          <img src="photo_fun_3.jpg" alt="Nobel Prize"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="fun-photo-placeholder" style="display:none;">photo_fun_3.jpg</div>
+          <div class="fun-photo-caption">holding a Nobel Prize</div>
+        </div>
+      </div>
     </div>
     <div class="info-list">
       <div class="info-block">
