@@ -345,7 +345,9 @@ p { line-height: 1.7; }
 /* Polaroid headshot — taped to the notebook */
 .polaroid {
   position: absolute;
-  top: 1rem; right: -1rem;
+  top: -0.5rem;
+  left: 50%;
+  margin-left: -75px;  /* center horizontally (half of 150px width) */
   width: 150px;
   background: #ffffff;
   padding: 10px 10px 32px;
@@ -353,22 +355,33 @@ p { line-height: 1.7; }
   box-shadow:
     0 2px 6px rgba(31,32,24,0.12),
     0 18px 36px -10px rgba(31,32,24,0.28);
-  transform: rotate(4deg);
+  transform: rotate(-3deg);
   z-index: 5;
   opacity: 0;
   animation: polaroidIn 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 1.2s;
   transition: transform 0.35s ease;
 }
 .polaroid:hover { transform: rotate(0deg) scale(1.04); }
-.polaroid img {
-  width: 100%; height: 155px;
-  object-fit: cover; object-position: center top;
-  display: block;
+/* Explicit photo container — clips overflow no matter what */
+.polaroid-photo {
+  width: 100%;
+  height: 155px;
+  overflow: hidden;
   background: var(--paper-2);
+  position: relative;
+  display: block;
+}
+.polaroid-photo img {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  object-position: center top;
 }
 .polaroid-placeholder {
-  width: 100%; height: 155px;
-  background: var(--paper-2);
+  width: 100%; height: 100%;
   display: flex; align-items: center; justify-content: center;
   font-family: var(--mono);
   font-size: 0.6rem;
@@ -399,8 +412,8 @@ p { line-height: 1.7; }
 }
 
 @keyframes polaroidIn {
-  from { opacity: 0; transform: rotate(8deg) translateY(-30px); }
-  to { opacity: 1; transform: rotate(4deg) translateY(0); }
+  from { opacity: 0; transform: rotate(-8deg) translateY(-30px); }
+  to { opacity: 1; transform: rotate(-3deg) translateY(0); }
 }
 
 /* Animated stroke-drawing for SVG illustrations.
@@ -856,17 +869,27 @@ p { line-height: 1.7; }
   transform: rotate(0deg) scale(1.05);
   z-index: 2;
 }
-.fun-photo img {
+/* Explicit photo container — clips overflow defensively */
+.fun-photo-frame {
   width: 100%;
   height: 130px;
-  object-fit: cover;
-  display: block;
+  overflow: hidden;
   background: var(--paper-2);
+  position: relative;
+  display: block;
+}
+.fun-photo-frame img {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 .fun-photo-placeholder {
   width: 100%;
-  height: 130px;
-  background: var(--paper-2);
+  height: 100%;
   display: flex; align-items: center; justify-content: center;
   font-family: var(--mono);
   font-size: 0.55rem;
