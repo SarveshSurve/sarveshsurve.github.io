@@ -936,7 +936,7 @@ p { line-height: 1.7; }
 /* CONTACT page specific */
 .contact-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
   gap: 4rem;
   align-items: start;
 }
@@ -945,6 +945,71 @@ p { line-height: 1.7; }
   line-height: 1.75;
   color: var(--ink-soft);
   margin-bottom: 1.2rem;
+}
+
+/* Contact page: headshot beside intro text */
+.contact-intro {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+.contact-photo {
+  position: relative;
+  background: #ffffff;
+  padding: 10px 10px 36px;
+  border: 1px solid rgba(31,32,24,0.08);
+  box-shadow:
+    0 2px 6px rgba(31,32,24,0.12),
+    0 18px 36px -10px rgba(31,32,24,0.25);
+  transform: rotate(-2deg);
+  transition: transform 0.35s ease;
+}
+.contact-photo:hover { transform: rotate(0deg) scale(1.02); }
+.contact-photo-frame {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: var(--paper-2);
+  position: relative;
+}
+.contact-photo-frame img {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  object-position: center top;
+}
+.contact-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-mute);
+  text-align: center;
+  padding: 0.5rem;
+}
+.contact-photo-caption {
+  position: absolute;
+  bottom: 8px; left: 0; right: 0;
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+}
+/* Tape strip on top */
+.contact-photo::before {
+  content: '';
+  position: absolute;
+  top: -10px; left: 50%;
+  transform: translateX(-50%) rotate(3deg);
+  width: 70px; height: 22px;
+  background: rgba(232, 220, 180, 0.7);
+  border: 1px solid rgba(180, 165, 130, 0.4);
+  border-radius: 1px;
+  box-shadow: 0 1px 2px rgba(31,32,24,0.06);
 }
 .contact-links { display: flex; flex-direction: column; gap: 0.7rem; }
 .contact-link {
@@ -1020,6 +1085,8 @@ footer .squiggle { margin: 0 auto 1.2rem; }
   .quick-grid { grid-template-columns: 1fr; }
   .research-grid { grid-template-columns: 1fr; }
   .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .contact-intro { grid-template-columns: 1fr; gap: 1.5rem; }
+  .contact-photo { max-width: 200px; margin: 0 auto; }
   .fun-photos { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
   .fun-photo:nth-child(3) { display: none; }
   .edu-card { grid-template-columns: 1fr; gap: 1rem; }
