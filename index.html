@@ -2,302 +2,141 @@
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4KT8WYSLN"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-Y4KT8WYSLN');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4KT8WYSLN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y4KT8WYSLN');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sarvesh V. Surve — Microbiologist</title>
-  <meta name="description" content="PhD Candidate in Microbiology & Immunology at Dartmouth. Gut microbiome science and Bacteroides as a CF probiotic." />
+  <title>Sarvesh V. Surve | Microbiologist</title>
+  <meta name="description" content="PhD candidate in Microbiology and Immunology at Dartmouth. I study how gut bacteria adapt to cystic fibrosis and whether Bacteroides can become a probiotic for it." />
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<!-- NAV -->
-<nav>
-  <a href="index.html" class="nav-logo">
-    <!-- Tiny petri-dish logo -->
-    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4">
-      <circle cx="16" cy="16" r="12"/>
-      <circle cx="16" cy="16" r="9" stroke-dasharray="2 3" opacity="0.6"/>
-      <circle cx="13" cy="14" r="1.4" fill="currentColor" stroke="none"/>
-      <circle cx="19" cy="17" r="1" fill="currentColor" stroke="none"/>
-      <circle cx="15" cy="19" r="0.8" fill="currentColor" stroke="none"/>
-    </svg>
-    Sarvesh V. Surve
-  </a>
-  <button class="mobile-toggle" aria-label="Toggle menu">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-  </button>
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="research.html">Research</a>
-    <a href="publications.html">Publications</a>
-    <a href="education.html">Education</a>
-    <a href="contact.html">Contact</a>
-  </div>
-</nav>
+<div class="shell">
 
-<main>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-left">
-      <div class="hero-tag fade-up d1">
-        <span class="dot"></span> PhD Candidate · Dartmouth
-      </div>
-      <h1 class="h-display fade-up d2">
-        Studying the gut, one <span class="scribble-circle"><em>microbe</em></span><br/>
-        at a time.
-      </h1>
-      <p class="hero-subtitle fade-up d3">
-        Microbiology &amp; Immunology at the Geisel School of Medicine.
-        I work on <em>Bacteroides</em> as a potential probiotic for cystic fibrosis.
-      </p>
-      <div class="hero-cta fade-up d4">
-        <a href="research.html" class="btn btn-primary">
-          View Research
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
-        </a>
-        <a href="sarvesh_cv.pdf" download class="btn btn-outline">Download CV</a>
-      </div>
-      <div class="hero-stats fade-up d5">
-        <div class="stat">
-          <div class="stat-num">10+</div>
-          <div class="stat-label">Publications</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">8</div>
-          <div class="stat-label">Years Research</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">6</div>
-          <div class="stat-label">First Author</div>
-        </div>
-      </div>
+  <header class="sidebar">
+    <div class="sidebar-top">
+      <a class="brand" href="index.html">Sarvesh V. Surve</a>
+      <p class="role">PhD candidate in Microbiology and Immunology, Dartmouth</p>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-panel">Menu</button>
     </div>
-
-    <!-- HERO ILLUSTRATION: line-art petri dish + flask + DNA + doodles + polaroid headshot -->
-    <div class="hero-illustration">
-      <svg viewBox="0 0 360 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- petri dish (main) -->
-        <g stroke="#1f2018" stroke-width="1.6" stroke-linecap="round" fill="none">
-          <ellipse cx="180" cy="220" rx="130" ry="40" class="draw-path"/>
-          <path d="M50 220 Q 50 280, 90 285 Q 180 295, 270 285 Q 310 280, 310 220" class="draw-path delay-1"/>
-        </g>
-        <!-- petri inner ring -->
-        <ellipse cx="180" cy="220" rx="120" ry="36" stroke="#3a6b4a" stroke-width="1" stroke-dasharray="3 4" fill="none" opacity="0.6" class="draw-path delay-2"/>
-
-        <!-- bacterial colonies inside dish -->
-        <g fill="#3a6b4a" opacity="0.85">
-          <circle cx="130" cy="220" r="4"/>
-          <circle cx="155" cy="232" r="2.5"/>
-          <circle cx="180" cy="218" r="5"/>
-          <circle cx="210" cy="225" r="3"/>
-          <circle cx="235" cy="218" r="3.5"/>
-          <circle cx="195" cy="240" r="2"/>
-          <circle cx="148" cy="208" r="2.2"/>
-          <circle cx="220" cy="208" r="2"/>
-        </g>
-
-        <!-- flask floating top-left -->
-        <g stroke="#1f2018" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" class="float-slow">
-          <path d="M45 50 L 45 75 L 25 115 Q 22 130, 38 130 L 78 130 Q 94 130, 91 115 L 71 75 L 71 50" class="draw-path delay-2"/>
-          <line x1="40" y1="50" x2="76" y2="50" stroke-width="1.8" class="draw-path delay-3"/>
-          <!-- liquid -->
-          <path d="M30 105 Q 58 100, 86 105 L 84 118 Q 58 122, 32 118 Z" fill="#3a6b4a" opacity="0.25" stroke="none"/>
-          <!-- bubbles -->
-          <circle cx="50" cy="100" r="2" fill="#3a6b4a" stroke="none" opacity="0.7"/>
-          <circle cx="65" cy="95" r="1.5" fill="#3a6b4a" stroke="none" opacity="0.6"/>
-        </g>
-
-        <!-- DNA helix top-right -->
-        <g stroke="#c8693a" stroke-width="1.5" stroke-linecap="round" fill="none" class="float-med">
-          <path d="M280 30 Q 320 55, 280 80 Q 240 105, 280 130 Q 320 155, 280 175" class="draw-path delay-3"/>
-          <path d="M320 30 Q 280 55, 320 80 Q 360 105, 320 130 Q 280 155, 320 175" class="draw-path delay-3"/>
-          <!-- rungs -->
-          <line x1="285" y1="42" x2="315" y2="42" stroke-width="1.1"/>
-          <line x1="280" y1="68" x2="320" y2="68" stroke-width="1.1"/>
-          <line x1="288" y1="93" x2="312" y2="93" stroke-width="1.1"/>
-          <line x1="280" y1="118" x2="320" y2="118" stroke-width="1.1"/>
-          <line x1="288" y1="143" x2="312" y2="143" stroke-width="1.1"/>
-          <line x1="282" y1="165" x2="318" y2="165" stroke-width="1.1"/>
-        </g>
-
-        <!-- doodle: small microbe creature bottom-left -->
-        <g stroke="#1f2018" stroke-width="1.4" stroke-linecap="round" fill="none" class="float-fast">
-          <ellipse cx="55" cy="330" rx="22" ry="14" class="draw-path delay-4"/>
-          <!-- flagella -->
-          <path d="M77 330 Q 90 325, 95 335 Q 100 340, 105 332" class="draw-path delay-4"/>
-          <path d="M33 330 Q 20 325, 15 335 Q 10 340, 5 332" class="draw-path delay-4"/>
-          <!-- face -->
-          <circle cx="50" cy="328" r="1.4" fill="#1f2018"/>
-          <circle cx="62" cy="328" r="1.4" fill="#1f2018"/>
-          <path d="M52 335 Q 56 338, 60 335" stroke-width="1"/>
-        </g>
-
-        <!-- doodle dots scattered -->
-        <g fill="#c8693a" opacity="0.7">
-          <circle cx="320" cy="290" r="2"/>
-          <circle cx="335" cy="305" r="1.4"/>
-          <circle cx="325" cy="320" r="1.7"/>
-        </g>
-
-        <!-- handwritten arrow pointing to petri -->
-        <g stroke="#c8693a" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.8">
-          <path d="M155 320 Q 145 290, 130 260" class="draw-path delay-4"/>
-          <path d="M126 268 L 130 260 L 138 263" class="draw-path delay-4"/>
-        </g>
-        <text x="158" y="340" font-family="Caveat, 'Comic Sans MS', cursive" font-size="14" fill="#c8693a" opacity="0.8" font-style="italic">where the magic happens</text>
-
-        <!-- tiny squiggle -->
-        <path d="M250 60 Q 258 55, 265 60 Q 272 65, 280 60" stroke="#3a6b4a" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.5"/>
-      </svg>
-
-      <!-- Polaroid headshot, taped to the notebook -->
-      <div class="polaroid">
-        <div class="polaroid-photo">
-          <img src="photo_headshot.jpg" alt="Sarvesh V. Surve"
-               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="polaroid-placeholder" style="display:none;">photo_<br>headshot.jpg</div>
-        </div>
-        <div class="polaroid-caption">that's me</div>
-      </div>
+    <div class="sidebar-panel" id="site-panel">
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="education.html">Education</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="thesis-countdown.html">Thesis countdown</a></li>
+        </ul>
+      </nav>
+      <ul class="side-links">
+        <li><a href="mailto:sarvesh.v.surve.gr@dartmouth.edu">Email</a></li>
+        <li><a href="sarvesh_cv.pdf" download>CV (PDF)</a></li>
+        <li><a href="https://scholar.google.com/citations?pli=1&authuser=1&user=W3YO928AAAAJ" target="_blank" rel="noopener">Google Scholar</a></li>
+        <li><a href="https://orcid.org/0000-0003-2942-6315" target="_blank" rel="noopener">ORCID</a></li>
+        <li><a href="https://www.linkedin.com/in/sarvesh-surve" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- QUICK INTRO -->
-<section class="wrap reveal" id="intro">
-  <div class="eyebrow">A short intro</div>
-  <h2 class="h-section"><span class="sketch-underline">The scientist behind the work.</span></h2>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>I'm a PhD candidate at the <strong>Geisel School of Medicine at Dartmouth</strong>, working in Dr. George O'Toole's lab. My research sits at the intersection of microbial ecology, gut microbiome science, and translational medicine — focused on how gut bacteria can improve outcomes in <strong>cystic fibrosis (CF)</strong>.</p>
-      <p>My thesis centers on <em>Bacteroides</em> as a potential CF probiotic. I combine experimental evolution, molecular microbiology, culturomics, and bioinformatics to understand how these bacteria adapt in the CF gut.</p>
-      <p>Before Dartmouth, I trained in India at <strong>Symbiosis International University</strong> and the <strong>University of Mumbai</strong>, developing expertise in lactic acid bacteria, probiotic science, and secondary metabolite biosynthesis. In 2025, I attended the <strong>Marine Biological Laboratory</strong>'s Microbial Diversity course at Woods Hole.</p>
-      <p>Outside the lab, I'm chasing National Parks, Formula 1 races, and the perfect data visualization.</p>
+  <div class="page">
+    <main id="main" class="content">
 
-      <!-- Fun photos: small tilted polaroid cluster -->
-      <div class="fun-photos">
-        <div class="fun-photo">
-          <div class="fun-photo-frame">
-            <img src="photo_fun_1.jpg" alt="Woods Hole"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="fun-photo-placeholder" style="display:none;">photo_fun_1.jpg</div>
-          </div>
-          <div class="fun-photo-caption">Woods Hole · 2025</div>
+      <section class="hero">
+        <div>
+          <h1>Sarvesh V. Surve</h1>
+          <p class="lede">I'm a PhD candidate at Dartmouth's Geisel School of Medicine, in George O'Toole's lab. I finish in June 2027 and am looking for postdoctoral and industry roles in microbiome science.</p>
+          <p class="actions">
+            <a class="btn btn-primary" href="research.html">Read about my research</a>
+            <a class="btn btn-secondary" href="sarvesh_cv.pdf" download>Download CV</a>
+          </p>
         </div>
-        <div class="fun-photo">
-          <div class="fun-photo-frame">
-            <img src="photo_fun_2.jpg" alt="Distracted by a duck"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="fun-photo-placeholder" style="display:none;">photo_fun_2.jpg</div>
-          </div>
-          <div class="fun-photo-caption">distracted by a duck</div>
+
+        <figure class="field-fig">
+          <svg id="field" viewBox="0 0 400 400" role="img" aria-label="Gram-stained bacteria: pink rods and a few violet rods.">
+            <defs>
+              <radialGradient id="slide" cx="50%" cy="50%" r="50%">
+                <stop offset="70%" stop-color="#fcf7fa"/>
+                <stop offset="100%" stop-color="#f1e6ed"/>
+              </radialGradient>
+            </defs>
+            <circle cx="200" cy="200" r="196" fill="url(#slide)" stroke="#1e1838" stroke-width="1.5"/>
+            <g id="cells"></g>
+            <line x1="214" y1="348" x2="314" y2="348" stroke="#1e1838" stroke-width="2"/>
+            <text x="264" y="338" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#4b4563">10 µm</text>
+          </svg>
+          <figcaption>Pink rods stand in for <i>Bacteroides</i>, violet rods for <i>Lactiplantibacillus</i>, the two genera I've worked with most.</figcaption>
+        </figure>
+      </section>
+
+      <section class="about">
+        <div class="prose">
+          <h2>About</h2>
+          <p><i>Bacteroides</i> is one of the most common genera in a healthy human gut. My thesis asks whether <i>Bacteroides</i> strains can be evolved to do better under conditions that resemble the cystic fibrosis (CF) gut, and which genetic changes make that possible. The work is now spun out as a startup.</p>
+          <p>I also run culturing and sequencing studies on gut samples from people with and without CF, manage and analyze Dartmouth CF Kids Cohort samples and clinical isolate collection.</p>
+          <p>Before Dartmouth I did my MSc at Symbiosis International University in Pune and stayed on as a research fellow, working on probiotic <i>Lactiplantibacillus plantarum</i> and on enzymes from agarwood. In summer 2025 I took the Microbial Diversity course at the Marine Biological Laboratory in Woods Hole.</p>
+          <p>Outside the lab I follow Formula 1, am working toward visiting every US national park.</p>
+
+          <ul class="photos">
+            <li>
+              <figure>
+                <img src="photo_fun_1.jpg" alt="Woods Hole" loading="lazy">
+                <figcaption>Woods Hole, 2025</figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure>
+                <img src="photo_fun_2.jpg" alt="Distracted by a duck" loading="lazy">
+                <figcaption>Distracted by a duck</figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure>
+                <img src="photo_fun_3.jpg" alt="Holding a Nobel Prize" loading="lazy">
+                <figcaption>Holding a Nobel Prize</figcaption>
+              </figure>
+            </li>
+          </ul>
         </div>
-        <div class="fun-photo">
-          <div class="fun-photo-frame">
-            <img src="photo_fun_3.jpg" alt="Nobel Prize"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="fun-photo-placeholder" style="display:none;">photo_fun_3.jpg</div>
-          </div>
-          <div class="fun-photo-caption">holding a Nobel Prize</div>
-        </div>
-      </div>
-    </div>
-    <div class="info-list">
-      <div class="info-block">
-        <h4>Current Position</h4>
-        <p>PhD Candidate · Microbiology &amp; Immunology<br>Dartmouth College · Hanover, NH<br>Expected June 2027</p>
-      </div>
-      <div class="info-block">
-        <h4>Advisor</h4>
-        <p>Dr. George A. O'Toole<br>Geisel School of Medicine</p>
-      </div>
-      <div class="info-block">
-        <h4>Interests</h4>
-        <p>Formula 1 · National Parks · Data visualization · Science history</p>
-      </div>
-    </div>
+        <img class="headshot" src="photo_headshot.jpg" alt="Sarvesh V. Surve">
+      </section>
+
+      <section>
+        <h2>Recent</h2>
+        <ol class="recent">
+          <li>
+            <time>Oct 27–31, 2026</time>
+            <p>Poster at Microbiome 2026, Cold Spring Harbor Laboratory, on longitudinal gut metagenomes from people with CF before, during, and after CFTR modulator therapy.</p>
+          </li>
+          <li>
+            <time>Sep 2026</time>
+            <p>Outstanding Presentation award at the 2026 Microbial Dark Matter Symposium in Laguna Beach, California, for a poster on the episymbiosis of Gracilibacteria with green sulfur bacteria.</p>
+          </li>
+          <li>
+            <time>Aug 3–7, 2026</time>
+            <p>Poster at the Molecular Genetics of Bacteria and Phages meeting in Madison, Wisconsin, on genomic adaptation of <i>Bacteroides</i> to the CF gut. It ranked in the top 12 of 330 posters.</p>
+          </li>
+        </ol>
+      </section>
+
+    </main>
+    <footer>© 2026 Sarvesh V. Surve. Dartmouth College, Hanover, NH.</footer>
   </div>
-</section>
 
-<!-- SQUIGGLE DIVIDER -->
-<svg class="squiggle" viewBox="0 0 120 14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <path d="M2 7 Q 12 2, 22 7 T 42 7 T 62 7 T 82 7 T 102 7 T 118 7" stroke="#3a6b4a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-</svg>
-
-<!-- QUICK NAV CARDS -->
-<section class="wrap reveal">
-  <div class="eyebrow">Where to next</div>
-  <h2 class="h-section">Explore the work.</h2>
-  <div class="quick-grid">
-    <a href="research.html" class="quick-card">
-      <div class="qc-icon">
-        <svg viewBox="0 0 48 48" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="24" cy="24" r="18"/>
-          <circle cx="24" cy="24" r="13" stroke-dasharray="2 3"/>
-          <circle cx="19" cy="21" r="2" fill="#3a6b4a" stroke="none"/>
-          <circle cx="28" cy="26" r="1.5" fill="#3a6b4a" stroke="none"/>
-          <circle cx="22" cy="29" r="1.2" fill="#3a6b4a" stroke="none"/>
-        </svg>
-      </div>
-      <h3>Research</h3>
-      <p>Six core areas — from CF gut microbiome to bacterial genetics and bioinformatics.</p>
-      <div class="qc-arrow">See projects →</div>
-    </a>
-
-    <a href="publications.html" class="quick-card">
-      <div class="qc-icon">
-        <svg viewBox="0 0 48 48" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M10 8 h22 a4 4 0 0 1 4 4 v28 a4 4 0 0 1 -4 4 h-22 z"/>
-          <line x1="15" y1="16" x2="31" y2="16"/>
-          <line x1="15" y1="22" x2="31" y2="22"/>
-          <line x1="15" y1="28" x2="25" y2="28"/>
-          <path d="M10 8 Q 6 10, 6 16 L 6 38 Q 6 44, 10 44" stroke-dasharray="2 2"/>
-        </svg>
-      </div>
-      <h3>Publications</h3>
-      <p>Peer-reviewed papers, including 6 first-author and a Top-100 Microbiology paper in <em>Scientific Reports</em>.</p>
-      <div class="qc-arrow">View papers →</div>
-    </a>
-
-    <a href="education.html" class="quick-card">
-      <div class="qc-icon">
-        <svg viewBox="0 0 48 48" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 18 L 24 10 L 42 18 L 24 26 Z"/>
-          <path d="M14 22 L 14 32 Q 24 38, 34 32 L 34 22"/>
-          <line x1="42" y1="18" x2="42" y2="30"/>
-          <circle cx="42" cy="32" r="1.5" fill="#3a6b4a" stroke="none"/>
-        </svg>
-      </div>
-      <h3>Education &amp; Awards</h3>
-      <p>Academic path from Mumbai to Symbiosis to Dartmouth — plus scholarships and fellowships.</p>
-      <div class="qc-arrow">Read more →</div>
-    </a>
-  </div>
-</section>
-
-</main>
-
-<footer>
-  <svg class="squiggle" viewBox="0 0 120 14" xmlns="http://www.w3.org/2000/svg">
-    <path d="M2 7 Q 12 2, 22 7 T 42 7 T 62 7 T 82 7 T 102 7 T 118 7" stroke="#7a7868" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-  </svg>
-  © 2026 Sarvesh V. Surve · Microbiology &amp; Immunology · Dartmouth College
-</footer>
+</div>
 
 <script src="main.js"></script>
 </body>
