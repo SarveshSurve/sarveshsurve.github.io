@@ -491,6 +491,9 @@ p { margin: 0 0 1rem; }
 .clock-label { margin-top: 0.6rem; font-size: 0.9rem; color: var(--ink-mute); }
 .clock-unit:first-child .clock-num { color: var(--pink); }
 
+#thesis-photos { margin-top: 3rem; }
+.photos-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
 /* ==========================================================
    RESPONSIVE
    ========================================================== */

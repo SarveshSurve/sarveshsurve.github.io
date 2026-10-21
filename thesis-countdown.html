@@ -56,15 +56,24 @@
     <main id="main" class="content">
 
       <section>
-        <h1>Thesis defense</h1>
+        <h1 id="title">Thesis defense</h1>
         <p class="lede page-intro" id="when">April 12, 2027, 10:00 AM Eastern.</p>
 
-        <div class="clock" role="timer">
+        <div class="clock" id="clock" role="timer">
           <div class="clock-unit"><div class="clock-num" id="d">--</div><div class="clock-label">days</div></div>
           <div class="clock-unit"><div class="clock-num" id="h">--</div><div class="clock-label">hours</div></div>
           <div class="clock-unit"><div class="clock-num" id="m">--</div><div class="clock-label">minutes</div></div>
           <div class="clock-unit"><div class="clock-num" id="s">--</div><div class="clock-label">seconds</div></div>
         </div>
+
+        <!-- Shown after the defense. Add Thesis_Fun_1.jpg to Thesis_Fun_4.jpg to the repo root;
+             any that are missing are skipped, and the whole block stays hidden if none exist. -->
+        <ul class="photos photos-2" id="thesis-photos" hidden>
+          <li><img src="Thesis_Fun_1.jpg" alt="" loading="lazy"></li>
+          <li><img src="Thesis_Fun_2.jpg" alt="" loading="lazy"></li>
+          <li><img src="Thesis_Fun_3.jpg" alt="" loading="lazy"></li>
+          <li><img src="Thesis_Fun_4.jpg" alt="" loading="lazy"></li>
+        </ul>
       </section>
 
     </main>
@@ -77,21 +86,54 @@
 <script>
   // 10:00 AM Eastern Daylight Time (UTC-4) on April 12, 2027, so the countdown
   // is the same for everyone regardless of their time zone.
-  var DEFENSE = new Date('2027-04-12T10:00:00-04:00');
+  var DEFENSE = new Date('2027-04-12T10:00:00-04:00').getTime();
+  // Four hours after the start, the page switches to the "defended" message.
+  var DONE = DEFENSE + 4 * 3600000;
+
+  // Preview the later states: thesis-countdown.html?state=progress or ?state=done
+  var forced = new URLSearchParams(location.search).get('state');
 
   function pad(n) { return String(n).padStart(2, '0'); }
+  function set(id, v) { document.getElementById(id).textContent = v; }
+
+  var finished = false;
+  function showFinished() {
+    if (finished) return;
+    finished = true;
+    set('title', 'Defended successfully');
+    set('when', 'Thesis defense, April 12, 2027.');
+    document.getElementById('clock').hidden = true;
+
+    var gallery = document.getElementById('thesis-photos');
+    var items = gallery.querySelectorAll('li');
+    var remaining = items.length;
+    items.forEach(function (li) {
+      li.querySelector('img').addEventListener('error', function () {
+        li.remove();
+        remaining--;
+        if (remaining === 0) gallery.hidden = true;
+      });
+    });
+    gallery.hidden = false;
+  }
 
   function tick() {
-    var ms = DEFENSE - new Date();
+    var now = Date.now();
+    if (forced === 'done') now = DONE;
+    if (forced === 'progress') now = DEFENSE + 1000;
+
+    if (now >= DONE) { showFinished(); return; }
+
+    var ms = DEFENSE - now;
     if (ms <= 0) {
-      ['d', 'h', 'm', 's'].forEach(function (id) { document.getElementById(id).textContent = '0'; });
-      document.getElementById('when').textContent = 'The defense was held on April 12, 2027.';
+      ['d', 'h', 'm', 's'].forEach(function (id) { set(id, '0'); });
+      set('when', 'The defense is in progress.');
       return;
     }
-    document.getElementById('d').textContent = Math.floor(ms / 86400000);
-    document.getElementById('h').textContent = pad(Math.floor((ms % 86400000) / 3600000));
-    document.getElementById('m').textContent = pad(Math.floor((ms % 3600000) / 60000));
-    document.getElementById('s').textContent = pad(Math.floor((ms % 60000) / 1000));
+    set('d', Math.floor(ms / 86400000));
+    set('h', pad(Math.floor((ms % 86400000) / 3600000)));
+    set('m', pad(Math.floor((ms % 3600000) / 60000)));
+    set('s', pad(Math.floor((ms % 60000) / 1000)));
   }
 
   tick();
