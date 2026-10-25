@@ -13,6 +13,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sarvesh V. Surve | Microbiologist</title>
   <meta name="description" content="PhD candidate in Microbiology and Immunology at Dartmouth. I study how gut bacteria adapt to cystic fibrosis and whether Bacteroides can become a probiotic for it." />
+  <script>
+    /* Apply the saved or system theme before first paint to avoid a flash */
+    try {
+      var t = localStorage.getItem('theme');
+      if (!t && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) t = 'dark';
+      if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    } catch (e) {}
+  </script>
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,6 +56,7 @@
         <li><a href="https://scholar.google.com/citations?pli=1&authuser=1&user=W3YO928AAAAJ" target="_blank" rel="noopener">Google Scholar</a></li>
         <li><a href="https://orcid.org/0000-0003-2942-6315" target="_blank" rel="noopener">ORCID</a></li>
         <li><a href="https://www.linkedin.com/in/sarvesh-surve" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><button class="theme-toggle" type="button"><span class="theme-icon" aria-hidden="true"></span>Dark mode</button></li>
       </ul>
     </div>
   </header>
@@ -57,7 +66,7 @@
 
       <section class="hero">
         <div>
-          <h1>Sarvesh V. Surve</h1>
+          <h1>I study how gut bacteria adapt to cystic fibrosis, and whether <i>Bacteroides</i> can become a probiotic for it.</h1>
           <p class="lede">I'm a PhD candidate at Dartmouth's Geisel School of Medicine, in George O'Toole's lab. I finish in June 2027 and am looking for postdoctoral and industry roles in microbiome science.</p>
           <p class="actions">
             <a class="btn btn-primary" href="research.html">Read about my research</a>
@@ -66,7 +75,8 @@
         </div>
 
         <figure class="field-fig">
-          <svg id="field" viewBox="0 0 400 400" role="img" aria-label="Gram-stained bacteria: pink rods and a few violet rods.">
+          <div class="field-wrap">
+            <svg id="field" viewBox="0 0 400 400" role="img" aria-label="Schematic microscope field of Gram-stained bacteria: pink rods and a few violet rods.">
             <defs>
               <radialGradient id="slide" cx="50%" cy="50%" r="50%">
                 <stop offset="70%" stop-color="#fcf7fa"/>
@@ -74,21 +84,22 @@
               </radialGradient>
             </defs>
             <circle cx="200" cy="200" r="196" fill="url(#slide)" stroke="#1e1838" stroke-width="1.5"/>
-            <g id="cells"></g>
             <line x1="214" y1="348" x2="314" y2="348" stroke="#1e1838" stroke-width="2"/>
             <text x="264" y="338" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#4b4563">10 µm</text>
           </svg>
-          <figcaption>Pink rods stand in for <i>Bacteroides</i>, violet rods for <i>Lactiplantibacillus</i>, the two genera I've worked with most.</figcaption>
+            <canvas id="field-cells" aria-hidden="true"></canvas>
+          </div>
+          <figcaption>Schematic of a Gram-stained field. Pink rods stand in for <i>Bacteroides</i>, violet rods for <i>Lactiplantibacillus</i>, the two genera I've worked with most.</figcaption>
         </figure>
       </section>
 
       <section class="about">
         <div class="prose">
           <h2>About</h2>
-          <p><i>Bacteroides</i> is one of the most common genera in a healthy human gut. My thesis asks whether <i>Bacteroides</i> strains can be evolved to do better under conditions that resemble the cystic fibrosis (CF) gut, and which genetic changes make that possible. The work is now spun out as a startup.</p>
-          <p>I also run culturing and sequencing studies on gut samples from people with and without CF, manage and analyze Dartmouth CF Kids Cohort samples and clinical isolate collection.</p>
+          <p><i>Bacteroides</i> is one of the most common genera in a healthy human gut. My thesis asks whether <i>Bacteroides</i> strains can be evolved to do better under conditions that resemble the cystic fibrosis (CF) gut, and which genetic changes make that possible. The work is covered by a pending patent application, on which I'm a named inventor, and is now the basis of a startup.</p>
+          <p>I also run culturing and sequencing studies on gut samples from people with and without CF, manage the lab's CF sample repository and isolate collection, and analyze gut metagenomes from the CF Kids Cohort.</p>
           <p>Before Dartmouth I did my MSc at Symbiosis International University in Pune and stayed on as a research fellow, working on probiotic <i>Lactiplantibacillus plantarum</i> and on enzymes from agarwood. In summer 2025 I took the Microbial Diversity course at the Marine Biological Laboratory in Woods Hole.</p>
-          <p>Outside the lab I follow Formula 1, am working toward visiting every US national park.</p>
+          <p>Outside the lab I follow Formula 1, am working toward visiting every US national park, and make data visualizations.</p>
 
           <ul class="photos">
             <li>
@@ -128,6 +139,10 @@
           <li>
             <time>Aug 3–7, 2026</time>
             <p>Poster at the Molecular Genetics of Bacteria and Phages meeting in Madison, Wisconsin, on genomic adaptation of <i>Bacteroides</i> to the CF gut. It ranked in the top 12 of 330 posters.</p>
+          </li>
+          <li>
+            <time>2026</time>
+            <p>Five papers published, two as first author: the regional colon culturome in health and CF, and the genomes of 109 gut bacteria. <a href="publications.html">See the list</a>.</p>
           </li>
         </ol>
       </section>

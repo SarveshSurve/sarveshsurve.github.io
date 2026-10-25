@@ -29,7 +29,31 @@
   --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
   --sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
+  --btn-bg: #4a2f8f;
+  --btn-fg: #ffffff;
+  --on-violet: #ffffff;
+
   --side: 17rem;
+  color-scheme: light;
+}
+
+/* Dark theme: same two stain colors, lightened to read on a dark slide */
+:root[data-theme="dark"] {
+  --bg: #15111f;
+  --surface: #1d1830;
+  --ink: #ece9f6;
+  --ink-soft: #bcb6d3;
+  --ink-mute: #9a94b3;
+  --violet: #a994f2;
+  --violet-tint: #2b2347;
+  --pink: #f26b90;
+  --pink-tint: #3a1c2a;
+  --slate: #7d7894;
+  --rule: #2e2846;
+  --btn-bg: #a994f2;
+  --btn-fg: #15111f;
+  --on-violet: #15111f;
+  color-scheme: dark;
 }
 
 html { scroll-behavior: smooth; }
@@ -61,14 +85,14 @@ a:hover { color: var(--pink); }
   border-radius: 2px;
 }
 
-::selection { background: var(--violet); color: #fff; }
+::selection { background: var(--violet); color: var(--on-violet); }
 
 .skip {
   position: absolute; left: -999px; top: 0;
-  background: var(--ink); color: #fff;
+  background: var(--ink); color: var(--bg);
   padding: 0.5rem 1rem; z-index: 100;
 }
-.skip:focus { left: 0; color: #fff; }
+.skip:focus { left: 0; color: var(--bg); }
 
 /* ==========================================================
    SHELL: fixed left rail + scrolling content
@@ -82,6 +106,7 @@ a:hover { color: var(--pink); }
 .sidebar {
   position: sticky; top: 0;
   height: 100vh;
+  height: 100dvh;
   display: flex; flex-direction: column;
   padding: 2.75rem 2rem 2rem;
   border-right: 1px solid var(--rule);
@@ -222,8 +247,8 @@ p { margin: 0 0 1rem; }
   border: 1.5px solid var(--violet);
   border-radius: 4px;
 }
-.btn-primary { background: var(--violet); color: #fff; }
-.btn-primary:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+.btn-primary { background: var(--btn-bg); border-color: var(--btn-bg); color: var(--btn-fg); }
+.btn-primary:hover { background: var(--ink); border-color: var(--ink); color: var(--bg); }
 .btn-secondary { background: transparent; color: var(--violet); }
 .btn-secondary:hover { background: var(--violet-tint); color: var(--violet); }
 
@@ -251,20 +276,10 @@ p { margin: 0 0 1rem; }
   color: var(--ink-mute);
 }
 
-/* The one moving element: cells drift in and out of the microscope field */
-.cell {
-  opacity: 0;
-  animation: cell-cycle 22s ease-in-out infinite both;
-}
-/* Fade in slowly, hold, fade out, repeat. Per-cell delays (set in main.js)
-   stagger the appearance so the field fills and empties gradually. */
-@keyframes cell-cycle {
-  0%   { opacity: 0; }
-  16%  { opacity: 1; }
-  68%  { opacity: 1; }
-  84%  { opacity: 0; }
-  100% { opacity: 0; }
-}
+.field-wrap { position: relative; }
+.field-wrap svg, .field-wrap canvas { display: block; width: 100%; }
+.field-wrap canvas { position: absolute; inset: 0; height: 100%; }
+:root[data-theme="dark"] .field-wrap { filter: brightness(0.92); }
 
 .about {
   display: grid;
@@ -494,6 +509,29 @@ p { margin: 0 0 1rem; }
 #thesis-photos { margin-top: 3rem; }
 .photos-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
+/* Theme switch */
+.theme-toggle {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0;
+  font: inherit;
+  color: var(--violet);
+  background: none; border: 0;
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+.theme-toggle:hover { color: var(--pink); }
+.theme-icon {
+  width: 0.8rem; height: 0.8rem;
+  border: 1.5px solid currentColor; border-radius: 50%;
+  background: linear-gradient(90deg, currentColor 50%, transparent 50%);
+}
+:root[data-theme="dark"] .degree img {
+  mix-blend-mode: normal;
+  background: #fff;
+  padding: 0.3rem;
+  border-radius: 4px;
+}
+
 /* ==========================================================
    RESPONSIVE
    ========================================================== */
@@ -547,5 +585,4 @@ p { margin: 0 0 1rem; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .cell { opacity: 1; animation: none; }
 }
