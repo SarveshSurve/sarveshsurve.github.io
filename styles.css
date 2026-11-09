@@ -30,6 +30,7 @@
   --sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --map-off: #d6d2e6;
+  --map-visited: rgba(201, 56, 95, 0.28);
   --btn-bg: #4a2f8f;
   --btn-fg: #ffffff;
   --on-violet: #ffffff;
@@ -52,6 +53,7 @@
   --slate: #7d7894;
   --rule: #2e2846;
   --map-off: #403862;
+  --map-visited: rgba(242, 107, 144, 0.34);
   --btn-bg: #a994f2;
   --btn-fg: #15111f;
   --on-violet: #15111f;
@@ -546,7 +548,11 @@ p { margin: 0 0 1rem; }
   stroke-width: 1;
   stroke-linejoin: round;
 }
-.us-map path.visited { fill: var(--pink); }
+.us-map path.visited { fill: var(--map-visited); }
+.us-map .park-marks line { stroke: var(--ink-mute); stroke-width: 1.2; }
+.us-map .park-marks circle { fill: var(--pink); stroke: var(--bg); stroke-width: 3; }
+.us-map .park-marks text { font: 18px var(--sans); fill: var(--ink); }
+.us-map.compact .park-marks line, .us-map.compact .park-marks text { display: none; }
 .us-map path:hover { opacity: 0.8; }
 .map-legend {
   display: flex; gap: 1.5rem;
@@ -558,7 +564,8 @@ p { margin: 0 0 1rem; }
   margin-right: 0.5rem; vertical-align: -0.1em;
   border-radius: 2px; background: var(--map-off);
 }
-.map-legend .v { background: var(--pink); }
+.map-legend .v { background: var(--map-visited); border: 0.5px solid var(--slate); }
+.map-legend .d { border-radius: 50%; background: var(--pink); }
 .map-note { max-width: 40rem; margin: 0.75rem 0 0; font-size: 0.9rem; color: var(--ink-mute); }
 
 .park-photos {

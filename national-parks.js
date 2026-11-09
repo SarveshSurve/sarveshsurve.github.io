@@ -157,6 +157,59 @@
         console.warn('national-parks-data.js: "' + n + '" is not a US state name or postal code.');
       }
     });
+    // Visited parks: a dot on the park, a name in a column at the left or right
+    var dots = NP.parks.filter(function (p) { return p.visited && p.xy; }).map(function (p) {
+      return { name: p.name, x: p.xy[0], y: p.xy[1] };
+    });
+    var leftCol = dots.filter(function (d) { return d.x < 490; }).sort(function (a, b) { return a.y - b.y; });
+    var rightCol = dots.filter(function (d) { return d.x >= 490; }).sort(function (a, b) { return a.y - b.y; });
+    function place(col, x, anchor) {
+      if (!col.length) return;
+      var step = Math.min(30, 560 / col.length);
+      var mid = col.reduce(function (s, d) { return s + d.y; }, 0) / col.length;
+      var span = step * (col.length - 1);
+      mid = Math.max(20 + span / 2, Math.min(590 - span / 2, mid));
+      col.forEach(function (d, i) { d.lx = x; d.ly = mid + (i - (col.length - 1) / 2) * step; d.anchor = anchor; });
+    }
+    place(leftCol, -12, 'end');
+    place(rightCol, 987, 'start');
+
+    var marks = document.createElementNS(NS, 'g');
+    marks.setAttribute('class', 'park-marks');
+    function svgEl(tag, attrs) {
+      var n = document.createElementNS(NS, tag);
+      Object.keys(attrs).forEach(function (k) { n.setAttribute(k, attrs[k]); });
+      return n;
+    }
+    dots.forEach(function (d) {
+      marks.appendChild(svgEl('line', {
+        x1: d.anchor === 'end' ? d.lx + 8 : d.lx - 8, y1: d.ly - 6, x2: d.x, y2: d.y
+      }));
+    });
+    dots.forEach(function (d) {
+      var c = svgEl('circle', { cx: d.x, cy: d.y, r: 6.5 });
+      var t = document.createElementNS(NS, 'title');
+      t.textContent = d.name + ' National Park';
+      c.appendChild(t);
+      marks.appendChild(c);
+    });
+    dots.forEach(function (d) {
+      var t = svgEl('text', { x: d.lx, y: d.ly, 'text-anchor': d.anchor });
+      t.textContent = d.name;
+      marks.appendChild(t);
+    });
+    svg.appendChild(marks);
+
+    // Labels need room on both sides; on narrow screens keep the dots and drop the labels
+    var narrow = window.matchMedia('(max-width: 44rem)');
+    function layout() {
+      var compact = narrow.matches;
+      svg.setAttribute('viewBox', compact ? '0 0 975 610' : '-190 0 1340 610');
+      svg.classList.toggle('compact', compact);
+    }
+    layout();
+    if (narrow.addEventListener) narrow.addEventListener('change', layout);
+
     mapBox.textContent = '';
     mapBox.appendChild(svg);
   }
