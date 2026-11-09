@@ -121,7 +121,8 @@
   }
   cells.forEach(function (c, idx) { c.delay = idx * STAGGER; });
 
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Nothing in the field moves, it only fades, so it keeps fading even when the
+  // visitor's system asks for reduced motion (that setting is aimed at movement).
 
   function smooth(x) { return x * x * (3 - 2 * x); }
   // 0 to 16% of the cycle: fade in. 16 to 68%: hold. 68 to 84%: fade out. Rest: empty.
@@ -150,7 +151,7 @@
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (var i = 0; i < cells.length; i++) {
       var c = cells[i];
-      var a = reduce ? 1 : alphaAt(t, c.delay);
+      var a = alphaAt(t, c.delay);
       if (a < 0.003) continue;
       ctx.globalAlpha = a;
       ctx.fillStyle = c.fill;
@@ -182,7 +183,7 @@
     requestAnimationFrame(frame);
   }
   function play() {
-    if (reduce || running || !visible) return;
+    if (running || !visible) return;
     running = true;
     requestAnimationFrame(frame);
   }
@@ -190,15 +191,15 @@
 
   resize();
   window.addEventListener('resize', resize);
-  if (!reduce) {
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) {
-        visible = entries[0].isIntersecting;
-        if (visible) play(); else stop();
-      }).observe(canvas);
-    }
-    play();
+  // Re-measure whenever the figure changes size (fonts loading, layout shifts, rotation)
+  if ('ResizeObserver' in window) new ResizeObserver(resize).observe(canvas);
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      visible = entries[0].isIntersecting;
+      if (visible) play(); else stop();
+    }).observe(canvas);
   }
+  play();
 })();
 
 // ===== Publications: filter by research area =====

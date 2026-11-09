@@ -29,6 +29,7 @@
   --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
   --sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
+  --map-off: #d6d2e6;
   --btn-bg: #4a2f8f;
   --btn-fg: #ffffff;
   --on-violet: #ffffff;
@@ -50,6 +51,7 @@
   --pink-tint: #3a1c2a;
   --slate: #7d7894;
   --rule: #2e2846;
+  --map-off: #403862;
   --btn-bg: #a994f2;
   --btn-fg: #15111f;
   --on-violet: #15111f;
@@ -533,6 +535,69 @@ p { margin: 0 0 1rem; }
 }
 
 /* ==========================================================
+   NATIONAL PARKS
+   ========================================================== */
+.map-wrap { max-width: 60rem; margin-top: 1rem; }
+.map-box { min-height: 6rem; }
+.us-map { display: block; width: 100%; height: auto; }
+.us-map path {
+  fill: var(--map-off);
+  stroke: var(--bg);
+  stroke-width: 1;
+  stroke-linejoin: round;
+}
+.us-map path.visited { fill: var(--pink); }
+.us-map path:hover { opacity: 0.8; }
+.map-legend {
+  display: flex; gap: 1.5rem;
+  margin-top: 0.75rem;
+  font-size: 0.875rem; color: var(--ink-soft);
+}
+.map-legend i {
+  display: inline-block; width: 0.9rem; height: 0.9rem;
+  margin-right: 0.5rem; vertical-align: -0.1em;
+  border-radius: 2px; background: var(--map-off);
+}
+.map-legend .v { background: var(--pink); }
+.map-note { max-width: 40rem; margin: 0.75rem 0 0; font-size: 0.9rem; color: var(--ink-mute); }
+
+.park-photos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 48rem;
+  margin: 1.25rem 0 2rem; padding: 0;
+  list-style: none;
+}
+.park-photos figure { margin: 0; }
+.park-photos img {
+  width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+  border-radius: 2px; background: var(--rule);
+}
+.park-photos figcaption { margin-top: 0.4rem; font-size: 0.8125rem; line-height: 1.4; color: var(--ink-mute); }
+
+.park-list {
+  columns: 3 14rem; column-gap: 2rem;
+  margin: 1.25rem 0 0; padding: 0;
+  list-style: none;
+}
+.park-list li {
+  position: relative;
+  break-inside: avoid;
+  padding: 0.3rem 0 0.3rem 1.4rem;
+  color: var(--ink-mute);
+}
+.park-list li::before {
+  content: '';
+  position: absolute; left: 0; top: 0.95em;
+  width: 0.7rem; height: 0.3rem;
+  border: 1.5px solid var(--slate); border-radius: 0.2rem;
+}
+.park-list li.visited { color: var(--ink); }
+.park-list li.visited::before { background: var(--pink); border-color: var(--pink); }
+.park-list small { margin-left: 0.4rem; font-size: 0.8rem; color: var(--ink-mute); }
+
+/* ==========================================================
    RESPONSIVE
    ========================================================== */
 @media (max-width: 70rem) {
@@ -575,6 +640,7 @@ p { margin: 0 0 1rem; }
   .entry figure { max-width: 18rem; }
 
   .pub { grid-template-columns: 1fr; gap: 0.25rem; }
+  .park-photos { grid-template-columns: 1fr; }
 
   .clock { gap: 1.25rem 2rem; margin-top: 2.5rem; }
   .clock-unit { min-width: 4rem; }
